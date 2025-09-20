@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -28,9 +30,11 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 58, 185, 235)),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 81, 126, 223),
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home xd'),
+      home: const MyHomePage(title: 'Mostrar lista de números uwu'),
     );
   }
 }
@@ -55,27 +59,57 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  String name = 'Alexis';
-  bool programing = true;
-  int age = 20;
+  List<int> _historial = [];
+  bool _mostrarHistorial = false;
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter+= 1;
+      _counter++;
+      _historial.add(_counter);
+      print(_historial);
     });
   }
 
-  void _decrementCounter() {
+  void _decrementador() {
     setState(() {
-      if(_counter>0){
+      if (_counter > 0) {
         _counter -= 1;
+        _historial.add(_counter);
+        print(_historial);
       }
     });
+  }
+
+  void _limpiarHistorial() {
+    setState(() {
+      _historial.clear();
+      _counter = 0;
+    });
+  }
+
+  void _cambiarEstadoHistorial() {
+    setState(() {
+      _mostrarHistorial = !_mostrarHistorial;
+    
+      print(_mostrarHistorial);
+    });
+  }
+
+  Widget getHistorial() {
+    if (_historial.isEmpty) {
+      return Text(
+        'Aún no hay nada en el hisorial :(',
+        style: TextStyle(fontSize: 18),
+      );
+    }
+
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: _historial.length,
+      itemBuilder: (context, index) {
+        return ListTile(title: Text('Valor actual: ${_historial[index]}'));
+      },
+    );
   }
 
   @override
@@ -115,35 +149,67 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pushed the button this many times:'),
+            Text(
+              'Veces que has presionado el boton:',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: Colors.black87,
+              ),
+            ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: const TextStyle(
+                fontSize: 80,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueAccent,
+              ),
             ),
-            SizedBox(height: 35),
-            Text('nombre : $name'),
-            Text('edad : $age'),
-            Text('estatus : $programing'),
+            if(_mostrarHistorial)
+            getHistorial(),
           ],
         ),
       ),
-      floatingActionButton: 
-      Row(mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        SizedBox(height: 12,),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min, 
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
               FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-              SizedBox(height: 12,),
+                onPressed: _incrementCounter,
+                tooltip: 'Incrementar',
+                child: const Icon(Icons.add),
+              ),
+              SizedBox(width: 15),
               FloatingActionButton(
-        onPressed: _decrementCounter,
-        tooltip: 'Decrement',
-        child: const Icon(Icons.remove),
+                onPressed: _decrementador,
+                tooltip: 'Decrementar',
+                child: const Icon(Icons.remove),
+              ),
+            ],
+          ),
+          SizedBox(height: 15), 
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FloatingActionButton(
+                onPressed: _limpiarHistorial,
+                tooltip: 'Eliminar',
+                child: const Icon(Icons.clear),
+              ),
+              SizedBox(width: 15),
+              FloatingActionButton(
+                onPressed: _cambiarEstadoHistorial,
+                tooltip: 'Mostrar/ocultar historial',
+                child: const Icon(Icons.remove_red_eye),
+              ),
+            ],
+          ),
+        ],
       ),
-      ], )
- // This trailing comma makes auto-formatting nicer for build methods.
+
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
