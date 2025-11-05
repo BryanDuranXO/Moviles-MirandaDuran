@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1239596953",
+    "project_id": "registerpage-bf252",
+    "storage_bucket": "registerpage-bf252.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1239596953:android:11451ed07d433818065d08",
+        "android_client_info": {
+          "package_name": "com.example.register_page_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVmbvlkmDNdMBTHw3lQkzDW2KpMci-0TM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
