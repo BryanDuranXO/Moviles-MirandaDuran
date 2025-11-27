@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "323505439868",
+    "project_id": "notisflutter",
+    "storage_bucket": "notisflutter.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323505439868:android:870b1245c9c19cc66675f9",
+        "android_client_info": {
+          "package_name": "com.example.actividad_notificaciones"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe4_2v_QiY8QCzbRk_IDAiyONwyE6iaXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
